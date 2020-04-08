@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>11 表单输入绑定</title>
+		<script src="vue.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		
+		<div id="app">
+			<input v-model="message" placeholder="edit me">
+			<p>Message is: {{ message }}</p>
+			
+			
+			<br>
+			<textarea v-model="message2" placeholder="add multiple lines"></textarea>
+			<p style="white-space: pre-line;">{{ message2 }}</p>
+			
+			<input type="checkbox" id="checkbox" v-model="checked">
+			<label for="checkbox">{{ checked }}</label>
+			
+			<div style="margin-top: 20px;">
+			  <input type="checkbox" id="jack" value="Jack" v-model="checkedNames">
+			  <label for="jack">Jack</label>
+			  <input type="checkbox" id="john" value="John" v-model="checkedNames">
+			  <label for="john">John</label>
+			  <input type="checkbox" id="mike" value="Mike" v-model="checkedNames">
+			  <label for="mike">Mike</label>
+			  <br>
+			  <span>Checked names: {{ checkedNames }}</span>
+			</div>
+			
+			<div style="margin-top: 20px;">
+			  <input type="radio" id="one" value="One" v-model="picked">
+			  <label for="one">One</label>
+			  <br>
+			  <input type="radio" id="two" value="Two" v-model="picked">
+			  <label for="two">Two</label>
+			  <br>
+			  <span>Picked: {{ picked }}</span>
+			</div>
+			
+			<div style="margin-top: 20px;">
+			  <select v-model="selected">
+			    <option disabled value="">请选择</option>
+			    <option>A</option>
+			    <option>B</option>
+			    <option>C</option>
+			  </select>
+			  <span>Selected: {{ selected }}</span>
+			</div>
+			
+			<div style="margin-top: 20px;">
+			  <select v-model="selected2" multiple style="width: 50px;">
+			    <option>A</option>
+			    <option>B</option>
+			    <option>C</option>
+			  </select>
+			  <br>
+			  <span>Selected: {{ selected2 }}</span>
+			</div>
+			
+			<select v-model="selected3">
+			  <option v-for="option in options" v-bind:value="option.value">
+			    {{ option.text }}
+			  </option>
+			</select>
+			<span>Selected: {{ selected3 }}</span>
+			<br />
+			<button type="button" @click="sumbit">提交</button>
+		</div>
+		
+		
+		<script>
+			var app = new Vue({
+				el: '#app',
+				data: {
+					message: '22',
+					message2: '',
+					checked: '',
+					checkedNames: [],
+					picked: '',
+					selected: '',
+					selected2: [],
+					selected3: 'A',
+					options: [
+					      { text: 'One', value: 'A' },
+					      { text: 'Two', value: 'B' },
+					      { text: 'Three', value: 'C' }
+					    ]
+				},
+				methods: {
+					sumbit : function(){
+						console.log(this.message);
+						var postObj = {
+							msg1: this.message,
+							msg2: this.message2,
+							checkval: this.checkedNames
+						};
+						console.log(postObj);
+					}
+				}
+				
+			});
+		</script>
+	</body>
+</html>

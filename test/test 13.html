@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>13 组件注册</title>
+		<script src="vue.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		
+		<div id="app">
+			<button-counter></button-counter>
+			<test></test>
+		</div>
+		
+		<script>
+			Vue.component('button-counter',{
+				props: ['title'],
+					
+				data: function(){
+					return{};
+				},
+				template: '<div><h1>h1....</h1></div>',
+				methods: {
+					
+				}
+			})
+			
+			var vm = new Vue({
+				el: '#app',
+				components: {
+					test: {
+						template: '<div><h2>h2......</h2> </div>'
+					}
+				}
+			});
+		</script>
+		
+	</body>
+</html>
