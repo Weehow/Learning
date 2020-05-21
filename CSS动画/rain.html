@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="css/rain.css"/>
+	</head>
+	<body>
+		<div class="content">
+			<div class="rain"></div>
+		</div>
+	</body>
+	<script src="js/jquery.min.js"></script>
+	<script>
+		let $content = $('.content');
+		let initNumber = 0;
+		for(let i = 0;i < 30;i++){
+			let lefts = Math.floor(Math.random()*5 + 2);
+			let delays = Math.floor(Math.random()*50 + 2);
+			initNumber += lefts;
+			let $div = $('<div/>').addClass('rain').css({
+				"left": initNumber+'%' ,
+				"top":lefts+'%',
+				"animation-delay":(delays/10)+'s',
+			});
+			$content.append($div);
+		}
+	</script>
+</html>

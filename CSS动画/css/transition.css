@@ -1,0 +1,55 @@
+.box {
+	width: 100px;
+	height: 100px;
+	background: black;
+}
+
+.demo-1 {
+	transition: transform 2s ease; 
+}
+
+.demo-1:hover {
+	transform: rotate(45deg);
+}
+
+.demo-2 {
+	margin-top: 10px;
+}
+
+.cell {
+	width: 200px;
+	height: 200px;
+	background: red;
+}
+
+.cell:hover {
+	animation: move 2s linear 2 alternate forwards;
+}
+@keyframes move{
+	100% {
+		transform: translateX(200px);
+	}
+}
+
+.demo-1,.demo-2 {
+	display: none;
+}
+
+.demo-3 {
+	margin: 40px;
+	border-radius: 50%;
+	animation: jump 1s cubic-bezier(0.45,-0.04, 0.93, 0.21) infinite alternate;
+}
+@keyframes jump{
+	0% {
+		transform: translateY(0);
+	}
+	90% {
+		transform: translateY(200px);
+		clip-path: ellipse(50% 50% at 50% 50%);
+	}
+	100% {
+		transform: translateY(210px);
+		clip-path: ellipse(50% 48% at 50% 48%);
+	}
+}

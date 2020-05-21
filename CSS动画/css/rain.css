@@ -1,0 +1,48 @@
+body,html {
+	height: 100%;
+	margin: 0;
+	padding: 0;
+}
+
+.content {
+	height: 100%;
+	position: relative;
+	background: #f2f2f2;
+	overflow: hidden;
+}
+
+.rain {
+	position: absolute;
+	opacity: 0;
+	
+	
+	/* 红包样式 */
+	width: 60px;
+	height: 60px;
+	background: url(../img/envelopes.png) no-repeat;
+	background-size: auto 20px;
+	animation: drops 1.5s linear infinite;
+	
+	/* 雨滴样式 */
+	/* width: 4px;
+	height: 6px;
+	background: #ccc;
+	animation: drops 1.5s cubic-bezier(0.49, 0.01, 0.38, 0.69) infinite;
+	clip-path: ellipse(10% 30% at 50% 50%); */
+	
+}
+@keyframes drops{
+	0% {
+		opacity: 0;
+	}
+	20% {
+		opacity: 1;
+	}
+	90% {
+		opacity: 1;
+	}
+	100% {
+		opacity: 0;
+		transform: translate3d(10px,100vh,-10px);
+	}
+}

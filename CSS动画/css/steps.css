@@ -1,0 +1,17 @@
+body,html {
+	margin: 0;
+	padding: 0;
+	background: #f6f6f6;
+}
+
+.loading {
+	width: 610px;
+	height: 610px;
+	background: url(../img/loading.jpg) no-repeat;
+	animation: round 2s steps(10) infinite;
+}
+@keyframes round{
+	100% {
+		transform: rotate(360deg);
+	}
+}

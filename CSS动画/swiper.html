@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>自动轮播</title>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" type="text/css" href="css/marquee.css" />
+	</head>
+	<body>
+		<!-- <marquee>阿姨，我不想再努力了</marquee> -->
+		<div class="marquee">
+			<div class="content">
+				<div class="list"><img src="img/bg1.jpg" alt=""></div>
+				<div class="list"><img src="img/bg2.jpg" alt=""></div>
+				<div class="list"><img src="img/bg3.jpg" alt=""></div>
+			</div>
+		</div>
+	</body>
+
+	<script src="js/jquery.min.js"></script>
+	<script>
+		$(() => {
+			var outerWidth = 600,
+				outerHeight = 400,
+				speed = 3,
+				transitionTime = 0.3,
+				initIndex = 0,
+				setTimeId = null;
+			var $marquee = $('.marquee');
+			var $content = $marquee.find('.content');
+			var $list = $content.find('.list');
+			var listLength = $list.length;
+			var contentWidth = outerWidth * listLength;
+			var style = document.styleSheets;
+			$marquee.css({
+				// "width": outerWidth + 'px',
+				"width": `${outerWidth}px`,
+				"height": outerHeight + 'px',
+			});
+			$list.css({
+				"width": outerWidth + 'px',
+				"height": outerHeight + 'px',
+			});
+			$content.css({
+				"width": contentWidth + 'px',
+				"height": outerHeight + 'px',
+				// "animation": `run ${speed*listLength}s linear infinite` ,
+			});
+			// style[0].insertRule(`@keyframes run{
+			// 	100% {
+			// 		transform: translateX( -${contentWidth}px);
+			// 	}
+			// }
+			// `);
+			var clone = $list.eq(0).clone();
+			$content.append(clone);
+			
+			function autoPlay(){
+				setTimeId = setInterval(()=>{
+					initIndex++;
+					$content.css({
+						"transition": `transform ${transitionTime}s ease`,
+						"transform": `translateX(-${outerWidth*initIndex}px)`,
+					})
+					initIndex === listLength ? initIndex = 0 : '';
+				},speed*1000)
+			}
+			autoPlay();
+			
+			$content[0].addEventListener('transitionend',()=>{
+				$content.css({
+					"transition": `none`,
+					"transform": `translateX(-${outerWidth*initIndex}px)`,
+				})
+			})
+		})
+	</script>
+</html>
