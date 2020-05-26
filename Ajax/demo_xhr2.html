@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-type" content="text/html" charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Demo</title>
+		<link rel="stylesheet" type="text/css" href="css/demo.css" />
+	</head>
+	<body>
+		<h1>员工查询</h1>
+		<label>请输入员工编号：</label>
+		<input type="text" id="keyword" />
+		<button id="search">查询</button>
+		<p id="searchResult"></p>
+
+		<h1>员工姓名</h1>
+		<label>请输入员工姓名：</label>
+		<input type="text" id="staffName" /><br />
+		<label>请输入员工编号：</label>
+		<input type="text" id="staffNumber" /><br />
+		<label>请输入员工性别：</label>
+		<select name="" id="staffSex">
+			<option value="man">男</option>
+			<option value="woman">女</option>
+		</select><br />
+		<label>请输入员工职位：</label>
+		<input type="text" id="staffJob" /><br />
+		<button id="save">保存</button>
+		<p id="createResult"></p>
+
+		<script src="js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+		<script>
+			$(() => {
+				$("#search").click(() => {
+					$.ajax({
+						type: "GET",
+						url: "http://127.0.0.1/Ajax/service_xhr2.php?number=" + $('#keyword').val(),
+						dataType: "json",
+						success: data => {
+							if (data.success) {
+								$("#searchResult").html(data.msg);
+							} else {
+								$("#searchResult").html("出现错误:" + data.msg);
+							}
+						},
+						error: jqXHR => {
+							alert('发生错误:' + jqXHR.status);
+						},
+					});
+				});
+
+				$("#save").click(() => {
+					$.ajax({
+						type: "POST",
+						url: "http://127.0.0.1/Ajax/service.php",
+						dataType: "json",
+						data: {
+							name: $("#staffName").val(),
+							number: $("#staffNumber").val(),
+							sex: $("#staffSex").val(),
+							job: $("#staffJob").val()
+						},
+						success: data => {
+							if (data.success) {
+								$("#createResult").html(data.msg);
+							} else {
+								$("#createResult").html("出现错误:" + data.msg);
+							}
+						},
+						error: jqXHR => {
+							alert('发生错误:' + jqXHR.status);
+						}
+					});
+				});
+			});
+
+			// $('#search').click(() => {
+			// 	// 发送Ajax请求并处理
+			// 	var request = new XMLHttpRequest();
+			// 	request.open("GET", "service.php?number=" + $('#keyword').val());
+			// 	request.send();
+			// 	request.onreadystatechange = function() {
+			// 		if (request.readyState === 4) {
+			// 			if (request.status === 200) {
+			// 				var data = JSON.parse(request.responseText);
+			// 				if (data.success) {
+			// 					$("#searchResult")[0].innerHTML = data.msg;
+			// 				} else {
+			// 					$("#searchResult")[0].innerHTML = "出现错误:" + data.msg;
+			// 				}
+			// 			} else {
+			// 				alert('发生错误:' + request.status);
+			// 			}
+			// 		}
+			// 	}
+			// })
+
+			// $('#save').click(() => {
+			// 	// 发送Ajax请求并处理
+			// 	var request = new XMLHttpRequest();
+			// 	request.open("POST", "service.php");
+			// 	var data = "name=" + $("#staffName").val() + "&number=" + $("#staffNumber").val() + "&sex=" + $("#staffSex").val() +
+			// 		"&job=" + $("#staffJob").val();
+			// 	request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded"); /* POST请求必须添加，否则显示错误 */
+			// 	request.send(data);
+			// 	request.onreadystatechange = function() {
+			// 		if (request.readyState === 4) {
+			// 			if (request.status === 200) {
+			// 				var data = JSON.parse(request.responseText);
+			// 				if (data.success) {
+			// 					$("#createResult").innerHTML = data.msg;
+			// 				} else {
+			// 					$("#createResult").innerHTML = "出现错误:" + data.msg;
+			// 				}
+			// 			} else {
+			// 				alert('发生错误:' + request.status);
+			// 			}
+			// 		}
+			// 	}
+
+			// })
+		</script>
+	</body>
+</html>
